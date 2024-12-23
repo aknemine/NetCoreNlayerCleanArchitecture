@@ -1,4 +1,7 @@
 ﻿using App.Repositories.Products;
+using App.Services.Products.Create;
+using App.Services.Products.Update;
+using App.Services.Products.UpdateStock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +18,7 @@ namespace App.Services.Products
         Task<ServiceResult<ProductDto?>> GetByIdAsync(int id);
         Task<ServiceResult<CreateProductResponse>> CreateAsync(CreateProductRequest request);
         Task<ServiceResult> UpdateAsync(int id, UpdateProductRequest request);
-        Task<ServiceResult> UpdateStock(UpdateProductStockRequest request)
+        Task<ServiceResult> UpdateStock(UpdateProductStockRequest request);
         Task<ServiceResult> DeleteAsync(int id);
     }
 }

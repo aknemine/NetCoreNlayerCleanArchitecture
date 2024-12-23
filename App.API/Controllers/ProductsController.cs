@@ -1,4 +1,9 @@
-﻿using App.Services.Products;
+﻿using App.Repositories.Products;
+using App.Services.Filters;
+using App.Services.Products;
+using App.Services.Products.Create;
+using App.Services.Products.Update;
+using App.Services.Products.UpdateStock;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -19,6 +24,7 @@ namespace App.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateProductRequest request)=> CreateActionResult(await productService.CreateAsync(request));
 
+        [ServiceFilter(typeof(NotFoundFilter<Product, int>))]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id,UpdateProductRequest request)=> CreateActionResult(await productService.UpdateAsync(id,request));
 
@@ -28,6 +34,7 @@ namespace App.API.Controllers
         //[HttpPut("stock")]//patch yerine bu şekilde de yazılabilir
         //public async Task<IActionResult> UpdateStock(UpdateProductStockRequest request) => CreateActionResult(await productService.UpdateStock(request));
 
+        [ServiceFilter(typeof(NotFoundFilter<Product,int>))]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id) => CreateActionResult(await productService.DeleteAsync(id));
 

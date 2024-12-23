@@ -10,12 +10,12 @@ namespace App.API.Controllers
     public class CustomBaseController : ControllerBase
     {
         [NonAction]
-        public IActionResult CreateActionResult<T>(ServiceResult<T> result,string? urlAsCreated=null)
+        public IActionResult CreateActionResult<T>(ServiceResult<T> result)
         {
             return result.Status switch
             {
                 HttpStatusCode.NoContent => NoContent(),
-                HttpStatusCode.Created => Created(result.UrlAsCreated,result.Data),
+                HttpStatusCode.Created => Created(result.UrlAsCreated,result),
                 _=>new ObjectResult(result) { StatusCode = result.Status.GetHashCode() }
             };
 

@@ -1,5 +1,6 @@
 using App.Application.Contracts.Caching;
 using App.Application.Extensions;
+using App.Bus;
 using App.Caching;
 using App.Persistance.Extensions;
 using CleanApp.API.ExceptionHandlers;
@@ -13,7 +14,8 @@ builder.Services.AddControllersWithFiltersExt().AddSwaggerGenExt().AddExceptionH
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-builder.Services.AddRepositories(builder.Configuration).AddServices(builder.Configuration);
+builder.Services.AddRepositories(builder.Configuration).AddServices(builder.Configuration)
+    .AddBusExt(builder.Configuration);
 
 var app = builder.Build();
 
